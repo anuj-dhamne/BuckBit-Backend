@@ -2,10 +2,10 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import './utils/reminderCron.js'
+import testRoutes from './routes/test.routes.js';
 const app= express();
 
 app.use(cors({
-    
     origin:["https://buckbit.vercel.app"],
     credentials:true
 }))
@@ -15,9 +15,7 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 // test mail routes : 
-import testRoutes from './routes/test.routes.js';
 app.use('/api', testRoutes);
-
 //user route imports 
 import userRouter from "./routes/user.routes.js"
 app.use("/api/v1/users",userRouter)

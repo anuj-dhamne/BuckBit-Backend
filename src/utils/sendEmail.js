@@ -2,15 +2,16 @@ import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail', 
-    auth: {
-        user: process.env.EMAIL_USER,        
-        pass: process.env.EMAIL_PASS   
-    }
+const sendMonthlyReportEmail = async (toEmail, monthName, pdfPath) => {
+
+  const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER ,
+    pass: process.env.EMAIL_PASS ,
+  },
 });
 
-const sendMonthlyReportEmail = async (toEmail, monthName, pdfPath) => {
     const mailOptions = {
         from: `"BuckBit" <${process.env.EMAIL_USER}>`,
         to: toEmail,

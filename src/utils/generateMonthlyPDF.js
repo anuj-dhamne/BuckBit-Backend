@@ -37,7 +37,6 @@ export const generateMonthlyPDF = async (user, expenses, monthName) => {
         { quantity: 0, description: "**Detailed Expense Log**", price: 0 },
         ...allExpenses
     ];
-    const logoBase64 = getBase64Image("public/temp/BuckBit_logo.png");
 
     const data = {
         images: {
@@ -45,7 +44,7 @@ export const generateMonthlyPDF = async (user, expenses, monthName) => {
             
         },
         sender: {
-            company: "Smart Expenses Manager",
+            company: "BuckBit-Smart Expenses Manager",
             address: "Generated Automatically",
             city: "India",
             country: "AI"
