@@ -17,6 +17,7 @@ app.use(cookieParser())
 
 // ping route -> to awake the server
 app.get('/', (req, res) => {
+  console.log('Ping received');
   res.send('Backend is alive!');
 });
 
