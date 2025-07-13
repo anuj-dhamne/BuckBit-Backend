@@ -15,6 +15,11 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
+// ping route -> to awake the server
+app.get('/', (req, res) => {
+  res.send('Backend is alive!');
+});
+
 // test mail routes : 
 app.use('/api', testRoutes);
 //user route imports 
