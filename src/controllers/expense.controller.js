@@ -17,10 +17,10 @@ const addExpense = asyncHandler(async (req, res) => {
     return res.status(404).json("user not found! ");
   }
 
-    console.log("Received title from frontend:", title);
+    // console.log("Received title from frontend:", title);
 
     // validate date is in correct form or not 
-    console.log("Date come from frontend : ",date);
+    // console.log("Date come from frontend : ",date);
     if (!date) {
         return res.status(400).json({ message: "date is not there ! " });
     }
@@ -29,15 +29,17 @@ const addExpense = asyncHandler(async (req, res) => {
         date = new Date(date);
     }
 
-    console.log("Date after convert into valid date object : ",date);
+    // console.log("Date after convert into valid date object : ",date);
     date = date.toISOString();
-    console.log("Date after converting in ISOstring : ",date);
+    // console.log("Date after converting in ISOstring : ",date);
 
-    // console.log("File received : ",req.files)
+    // console.log("File received : ",req.files);
     let billPhotoUrl = "";
   const billPhotoLocalPath = req.files?.bill_photo?.[0]?.path;
+//   console.log("photo url : ",billPhotoLocalPath);
   if (billPhotoLocalPath) {
     const billPhotoUpload = await uploadOnCloudinary(billPhotoLocalPath);
+    // console.log("link after image upload to cloudinary : ",billPhotoUpload)
     if (!billPhotoUpload) {
       return res.status(400).json( "Failed to upload bill photo.");
     }
@@ -133,7 +135,6 @@ const updateExpense = asyncHandler(async (req, res) => {
 
 
 )
-
 const deleteExpense = asyncHandler(async (req, res) => {
     const expensesId = req.params.id;
     console.log("Expenses ID : ",req.params.id);
