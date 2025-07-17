@@ -83,13 +83,16 @@ const updateExpense = asyncHandler(async (req, res) => {
     return res.status(404).json("user not found! ");
   }
   console.log("expened Amount : ",user.expendAmount);
-    // console.log("Expense ID:", expensesId);
+    console.log("Expense ID:", expensesId);
     let { title, date, amount, description } = req.body;
+    amount=Number(amount);
     console.log("Req.body : ",req.body);
     console.log("Amount from frontend : ",amount);
         let billPhotoUrl = "";
     const billPhotoLocalPath = req.files?.bill_photo?.[0]?.path;
+    console.log("billphoto : ",billPhotoLocalPath);
     if (billPhotoLocalPath) {
+        console.log("In if-else for photot")
         const billPhotoUpload = await uploadOnCloudinary(billPhotoLocalPath);
         if (!billPhotoUpload) {
         return res.status(400).json( "Failed to upload bill photo.");
@@ -97,14 +100,14 @@ const updateExpense = asyncHandler(async (req, res) => {
         billPhotoUrl = billPhotoUpload.url;
     }
     // validate date is in correct form or not 
-    if (date) {
-        // Convert from "DD-MM-YYYY" to "YYYY-MM-DD"
-        const [day, month, year] = date.split("-");
-        date = new Date(`${year}-${month}-${day}`);
-        if (isNaN(date)) {
-            return res.status(400).json("Invalid date format! Use 'DD-MM-YYYY'.");
-        }
-    }
+    // if (date) {
+    //     // Convert from "DD-MM-YYYY" to "YYYY-MM-DD"
+    //     const [day, month, year] = date.split("-");
+    //     date = new Date(`${year}-${month}-${day}`);
+    //     if (isNaN(date)) {
+    //         return res.status(400).json("Invalid date format! Use 'DD-MM-YYYY'.");
+    //     }
+    // }
     const test = await Expense.findById(expensesId);
     const oldAmount = test.amount;
     console.log("Old amount:",oldAmount);
