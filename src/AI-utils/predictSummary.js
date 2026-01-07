@@ -41,7 +41,7 @@ Respond with a concise, user-friendly paragraph. Avoid unnecessary repetition or
 
     try {
         const response = await axios.post(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+            `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
             {
                 contents: [{ role: "user", parts: [{ text: prompt }] }]
             },
@@ -57,7 +57,7 @@ Respond with a concise, user-friendly paragraph. Avoid unnecessary repetition or
 
         return responseText;
     } catch (error) {
-        console.error("Gemini summary generation failed:", error.message);
+        console.error("Gemini summary generation failed:", error.response?.data || error.message);
         return "We couldn't generate your monthly summary at the moment. Please try again later.";
     }
 }
